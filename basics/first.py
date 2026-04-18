@@ -3,6 +3,8 @@ import numpy as np
 from sklearn.model_selection import  train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_absolute_error
+import joblib
 # load data 
 df=pd.read_csv("employee_data_200_rows.csv")
 
@@ -101,10 +103,21 @@ sample_df = pd.DataFrame([{
     'exp_level_expert': 0
 }])
 
-prediction = model.predict(scaler.transform(sample_df))
+# prediction = model.predict(scaler.transform(sample_df))
 
-print("predict salary : ",prediction[0])
+# print("predict salary : ",prediction[0])
+# print("R2 Score:", r2_score(y_test, y_pred))
+# print("MAE:", mean_absolute_error(y_test, y_pred))
 
 
 # print(X_train.head())
 # print(df)
+
+# dump the model 
+# save model
+
+# save model
+joblib.dump(model, "salary_model.pkl")
+
+# save scaler
+joblib.dump(scaler, "scaler.pkl")
