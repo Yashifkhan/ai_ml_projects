@@ -1,7 +1,7 @@
 import numpay as np
 import pandas as pd
 
-df=pd.read_csv("house_prices_advanced_regression.csv")
+df=pd.read_csv("train.csv")
 
 # print only five column 
 # print(df.head())
@@ -75,21 +75,45 @@ df=pd.read_csv("house_prices_advanced_regression.csv")
 
 
 # finaly clear and filted data  
-# # Drop high missing
-# high_missing = (df.isnull().sum() / len(df)) * 100
-# high_missing = high_missing[high_missing > 80].index
-# df.drop(columns=high_missing, inplace=True)
+# Drop high missing
+high_missing = (df.isnull().sum() / len(df)) * 100
+high_missing = high_missing[high_missing > 80].index
+df.drop(columns=high_missing, inplace=True)
 
-# # Fill categorical
-# cat_cols = df.select_dtypes(include="object").columns
-# df[cat_cols] = df[cat_cols].fillna("None")
+# Fill categorical
+cat_cols = df.select_dtypes(include="object").columns
+df[cat_cols] = df[cat_cols].fillna("None")
 
-# # Fill numerical
-# num_cols = df.select_dtypes(include=["int64", "float64"]).columns
-# df[num_cols] = df[num_cols].fillna(df[num_cols].median())
+# Fill numerical
+num_cols = df.select_dtypes(include=["int64", "float64"]).columns
+df[num_cols] = df[num_cols].fillna(df[num_cols].median())
 
 
-print(df.isnull().sum().sum())
+# print(df.isnull().sum().sum())
 # ans is 0 mins you data is 100 % cleared 
 
+
+# Encoding Categorical Data (TEXT → NUMBERS)
+cat_df=df.select_dtypes(include="object").columns
+# print(df.head())
+# print(cat_df)
+
+df=pd.get_dummies(df,columns=cat_cols,drop_first=True)
+# print(df.head())
+# print(df.shape)
+
+
+# outlire value ko range me lata hai 
+from sklearn.preprocessing import StandardScaler
+
+X = df.drop("SalePrice", axis=1)
+y = df["SalePrice"]
+
+# print(y)
+
+# Apply scaling
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# print(X_scaled[:5])
 
