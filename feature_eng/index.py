@@ -126,3 +126,7 @@ corr = df.corr()
 corr_target = corr["SalePrice"].sort_values(ascending=False)
 
 print(corr_target)
+
+selected_features = corr_target[abs(corr_target) > 0.1].index
+
+df = df[selected_features]
