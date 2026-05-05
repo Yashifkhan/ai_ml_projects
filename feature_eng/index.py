@@ -104,16 +104,25 @@ df=pd.get_dummies(df,columns=cat_cols,drop_first=True)
 
 
 # outlire value ko range me lata hai 
-from sklearn.preprocessing import StandardScaler
+# from sklearn.preprocessing import StandardScaler
 
-X = df.drop("SalePrice", axis=1)
-y = df["SalePrice"]
+# X = df.drop("SalePrice", axis=1)
+# y = df["SalePrice"]
 
 # print(y)
 
 # Apply scaling
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
+# scaler = StandardScaler()
+# X_scaled = scaler.fit_transform(X)
 
 # print(X_scaled[:5])
 
+
+# learn about the Feature Selection
+
+corr = df.corr()
+
+# SalePrice ke saath correlation
+corr_target = corr["SalePrice"].sort_values(ascending=False)
+
+print(corr_target)
