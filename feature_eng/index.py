@@ -119,14 +119,19 @@ df=pd.get_dummies(df,columns=cat_cols,drop_first=True)
 
 
 # learn about the Feature Selection
-
+# it try to find to relation b/w two point which column is strong effect to the sale price column 
+# this is create a mtrix with data to show the which column storng realte with sale price 
 corr = df.corr()
-
+# print(df.head())
+# print(corr.SalePrice)
 # SalePrice ke saath correlation
 corr_target = corr["SalePrice"].sort_values(ascending=False)
 
-print(corr_target)
+# print(corr_target)
 
 selected_features = corr_target[abs(corr_target) > 0.1].index
 
 df = df[selected_features]
+print(df[selected_features])
+# print(df.shape)
+# print(df.columns)
