@@ -132,6 +132,6 @@ corr_target = corr["SalePrice"].sort_values(ascending=False)
 selected_features = corr_target[abs(corr_target) > 0.1].index
 
 df = df[selected_features]
-print(df[selected_features])
+# print(df[selected_features])
 # print(df.shape)
 # print(df.columns)

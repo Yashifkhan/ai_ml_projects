@@ -70,4 +70,4 @@ pd.set_option('display.max_rows', None)
 # Optional: widen display so columns don’t wrap
 pd.set_option('display.width', 1000)
 
-print(df_movies.head(10))
+# print(df_movies.head(10))
